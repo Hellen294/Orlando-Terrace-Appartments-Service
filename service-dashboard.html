@@ -111,10 +111,42 @@
       <p id="service-benefits"></p>
     </div>
 
-    <div class="section">
-      <h2>Bitcoin Payment Address</h2>
-      <p class="address">bc1q9pkvjhdujghqhgalzu2xptges2xt8ewp3jexqa</p>
-    </div>
+<div class="section">
+  <h2>Bitcoin Payment Address</h2>
+  <button id="copyAddressBtn" class="copy-btn">
+    bc1q9pkvjhdujghqhgalzu2xptges2xt8ewp3jexqa
+  </button>
+  <p id="copyMsg" style="color: limegreen; display: none;">Copied!</p>
+</div>
+
+<style>
+  .copy-btn {
+    background-color: #f2f2f2;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background-color: #e0e0e0;
+  }
+</style>
+
+<script>
+  document.getElementById("copyAddressBtn").addEventListener("click", function () {
+    const address = this.textContent;
+    navigator.clipboard.writeText(address).then(() => {
+      const msg = document.getElementById("copyMsg");
+      msg.style.display = "inline";
+      setTimeout(() => msg.style.display = "none", 2000);
+    });
+  });
+</script>
+
 
     <div class="section">
       <h2>Make a Payment</h2>
