@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Orlando Terrace</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .card, .info-section {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #27ae60;
+    }
+
+    .location {
+      color: #2980b9;
+      font-weight: bold;
+    }
+
+    .track-btn, .explore-btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      margin-top: 1rem;
+      background-color: #2980b9;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .track-btn:hover, .explore-btn:hover {
+      background-color: #1f5f89;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .utility-slider {
+      background: white;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      padding-bottom: 1rem;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 1;
+    }
+
+    .utility-slider img {
+      width: 100%;
+      height: 200px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      object-fit: cover;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Orlando Terrace Apartments</h1>
+    <p>Where Comfort Meets Convenience</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>✨ Congratulations, Chanda Campbell!</h2>
+      <p>You are now a resident of <span class="location">Orlando Terrace, 32808, Orlando FL</span>.</p>
+      <p>Move-in Date: <strong>August 1st, 2025</strong></p>
+      <p>Your rent has been paid in full and your apartment key is being delivered via <strong>FedEx</strong>.</p>
+      <a href="track.html" class="track-btn">🚚 Track Delivery</a>
+    </div>
+
+    <div class="gallery">
+      <img src="https://images1.apartments.com/i2/OY1Wvh-i8OubTtQ8oss6-IaONEM_FuS_yL8b_JGUsEE/113/orlando-terrace-orlando-fl-primary-photo.jpg?p=1" alt="Living Room">
+      <img src="https://images1.apartments.com/i2/Fy4gWFZUSUNkwcLiTetag9xRFwHmu7ZOYGnfe-qpNcI/113/orlando-terrace-orlando-fl-1-br-1-ba---576sf.jpg?p=1" alt="Kitchen">
+      <img src="https://images1.apartments.com/i2/acpfaGY6H9mqdS1yL_rB0JABpddAvvIETHm8edb6y2U/113/orlando-terrace-orlando-fl-building-photo.jpg?p=1" alt="building-photo">
+      <img src="https://images1.apartments.com/i2/DoMwN3DO_YrmigDTxU4PN5rRBNB1GRHeHzjOOkKXtlc/113/orlando-terrace-orlando-fl-4697-rose-coral-dr-orlando-fl-32808.jpg?p=1" alt="Bathroom">
+      <img src="https://images1.apartments.com/i2/gsKj0PvSFGVU4vkO6AN8xVlSEZYzO2z1gh9lHMqJdEw/113/orlando-terrace-orlando-fl-mail-boxes.jpg?p=1" alt="mail-boxes">
+      <img src="https://images1.apartments.com/i2/URkLpDbU_HD-xlheTiPkIJFXrDRFgapXbOpFBkrdS8o/113/orlando-terrace-orlando-fl-4697-rose-coral-dr-orlando-fl-32808.jpg?p=1" alt="Kitchen">
+      <img src="https://images1.apartments.com/i2/ZEqfwL4o1H6E5swz1cEh1SqyWb-XpBpdx482mxFRucw/113/orlando-terrace-orlando-fl-4697-rose-coral-dr-orlando-fl-32808.jpg?p=1" alt="building-photo">
+      <img src="https://images1.apartments.com/i2/Bcl6ggzX6mO6dUTvClrjvuKC3EGtXe1hX72dZ-m86yc/113/orlando-terrace-orlando-fl-4697-rose-coral-dr-orlando-fl-32808.jpg?p=1" alt="Bathroom">
+    </div>
+
+<section id="utilities" style="text-align:center; padding: 40px; background-color:#f5f5f5;">
+  <h2 style="font-size: 2em; margin-bottom: 20px;">Available Utility Services</h2>
+  <div id="utility-card" style="max-width:600px; margin:0 auto; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); overflow:hidden; transition: all 0.5s ease;">
+    <img id="utility-img" src="" alt="Utility Image" style="width:100%; height:300px; object-fit:cover;">
+    <div style="padding:20px;">
+      <h3 id="utility-title" style="margin:10px 0; font-size:1.5em;"></h3>
+      <p id="utility-desc" style="font-size:1.1em; color:#555;"></p>
+      <a id="utility-link" href="#" target="_blank" style="display:inline-block; margin-top:15px; background:#007BFF; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold;">Explore 3D</a>
+    </div>
+  </div>
+</section>
+
+
+    <div class="info-section">
+      <h2>About Orlando Terrace</h2>
+      <p>Orlando Terrace is an apartment community that prioritizes convenience and your satisfaction. We offer studio, 1-bedroom, and 2-bedroom homes featuring private patios, vinyl plank flooring, and brand-new kitchen appliances. Located in vibrant Orlando, enjoy easy access to Walt Disney World, Universal Studios, and UCF, all just minutes away. Apartments are available now and move-in requires no security deposit!</p>
+    </div>
+
+    <div class="info-section">
+      <h2>Apartment Facts, Features & Policies</h2>
+      <ul>
+        <li><strong>Lease Terms:</strong> 3 to 13 months available</li>
+        <li><strong>Pets:</strong> Cats & Dogs allowed, $300 one-time fee, $25/month, 2 max per unit</li>
+        <li><strong>Cooling:</strong> Wall-mounted HVAC</li>
+        <li><strong>Flooring:</strong> Vinyl plank, plush carpet in select units</li>
+        <li><strong>Appliances:</strong> Refrigerator, Single Basin Sink, Laminate Countertops</li>
+        <li><strong>Entry:</strong> Semi-private</li>
+        <li><strong>Bathrooms:</strong> Full-size tub & shower</li>
+        <li><strong>Nearby Attractions:</strong> Downtown Orlando (15 min), Walt Disney (30 min), Airport (35 min)</li>
+        <li><strong>Special Features:</strong> Vaulted ceilings, Spacious closets, Windows with blinds</li>
+        <li><strong>School District:</strong> Evans High, College Park Middle, Lake Silver Elementary</li>
+      </ul>
+    </div>
+
+    <div class="info-section">
+      <h2>Office Hours</h2>
+      <ul>
+        <li>Mon - Fri: 8:30 am - 5:00 pm</li>
+        <li>Sat - Sun: Closed</li>
+      </ul>
+      <p><strong>Leasing Office:</strong> Managed by Odin Management<br>
+      <strong>Phone:</strong> (689) 210-3871</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Orlando Terrace Apartments | Odin Management | All Rights Reserved.
+  </footer>
+
+<script>
+  const utilities = [
+    {
+      title: "High-Speed Internet",
+      desc: "Reliable Wi-Fi with speeds up to 1 Gbps. Perfect for streaming, gaming, and remote work. Powered by AT&T Fiber and Spectrum.",
+      img: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1000&q=80",
+      link: "service-dashboard.html?service=internet"
+    },
+    {
+      title: "Pet Services",
+      desc: "On-demand dog walking, grooming, and in-unit pet care. Partnered with Rover and Wag! Pet lovers welcome here.",
+      img: "https://www.dogseechew.in/storage/editor_648b14d0a0dc8-pet-care-on-a-budget-an-expert-guide.jpg",
+      link: "service-dashboard.html?service=pet"
+    },
+    {
+      title: "Cable TV",
+      desc: "Xfinity, Spectrum, and DirecTV packages available in all units. Get your favorite channels with HD & DVR included.",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBhFndyT3WfXBaJl7rKwcrHbWrc99U7gzfSg&s",
+      link: "service-dashboard.html?service=cable"
+    },
+    {
+      title: "Home Security",
+      desc: "Smart security systems from Ring, ADT, and Vivint. Remote control, video monitoring, and 24/7 alerts.",
+      img: "https://closeguardtechnology.com/content/images/smarthomeimage.jpg",
+      link: "service-dashboard.html?service=security"
+    }
+  ];
+
+  let index = 0;
+  const imgEl = document.getElementById('utility-img');
+  const titleEl = document.getElementById('utility-title');
+  const descEl = document.getElementById('utility-desc');
+  const linkEl = document.getElementById('utility-link');
+
+  function updateUtility() {
+    const util = utilities[index];
+    imgEl.src = util.img;
+    titleEl.textContent = util.title;
+    descEl.textContent = util.desc;
+    linkEl.href = util.link;
+    linkEl.textContent = "Explore 3D";
+    index = (index + 1) % utilities.length;
+  }
+
+  // Initial load
+  updateUtility();
+  // Change every 3 seconds
+  setInterval(updateUtility, 3000);
+</script>
+
+
+</body>
+</html>
