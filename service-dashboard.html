@@ -263,34 +263,79 @@
       document.querySelector(".service-card").innerHTML = "<p>Service not found. Please go back and try again.</p>";
     }
 
-    // Payment form submission
-    document.getElementById("payment-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  // Payment form submission
+  document.getElementById("payment-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      alert("⚠️ Please make your BTC transfer now to:\nbc1q9pkvjhdujghqhgalzu2xptges2xt8ewp3jexqa\n\nOnce confirmed, you will receive an email with instructions and details regarding the installation and start-up date. Thank you for choosing our services.");
+    // Get form data
+    const name = document.getElementById("tenant-name").value;
+    const phone = document.getElementById("tenant-phone").value;
+    const email = document.getElementById("tenant-email").value;
+    const plan = document.getElementById("tenant-plan").value;
 
-      const name = document.getElementById("tenant-name").value;
-      const phone = document.getElementById("tenant-phone").value;
-      const email = document.getElementById("tenant-email").value;
-      const plan = document.getElementById("tenant-plan").value;
+    // Create the modal popup
+    const modal = document.createElement("div");
+    modal.id = "btcModal";
+    modal.style.cssText = `
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+    `;
 
-      try {
-        await db.collection("orlando_payments").add({
-          name,
-          phone,
-          email,
-          plan,
-          service: selectedService,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
+    modal.innerHTML = `
+      <div style="background: #fff; padding: 20px; max-width: 400px; border-radius: 8px; text-align: center; position: relative; font-family: Arial, sans-serif;">
+        <h3 style="margin-top: 0;">⚠️ Make Your BTC Transfer</h3>
+        <p style="word-break: break-all; font-weight: bold;" id="btcAddress">
+          bc1q9pkvjhdujghqhgalzu2xptges2xt8ewp3jexqa
+        </p>
+        <button id="copyBtn" style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          📋 Copy Address
+        </button>
+        <p id="copyMsg" style="color: green; display: none; margin-top: 10px;">Address copied!</p>
+        <p style="margin-top: 15px;">Once confirmed, you will receive an email with installation instructions and your start-up date.</p>
+        <button id="closeBtn" style="margin-top: 15px; background: #dc3545; color: #fff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">
+          Close
+        </button>
+      </div>
+    `;
 
-        alert("✅ Payment details submitted. You'll receive an email once payment is confirmed.");
-        document.getElementById("payment-form").reset();
-      } catch (error) {
-        console.error("Error saving payment:", error);
-        alert("❌ Error submitting payment info. Try again.");
-      }
+    document.body.appendChild(modal);
+
+    // Copy button logic
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      const address = document.getElementById("btcAddress").innerText;
+      navigator.clipboard.writeText(address).then(() => {
+        const msg = document.getElementById("copyMsg");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 2000);
+      });
     });
+
+    // Close button logic
+    document.getElementById("closeBtn").addEventListener("click", () => {
+      modal.remove();
+    });
+
+    // Save to Firebase
+    try {
+      await db.collection("orlando_payments").add({
+        name,
+        phone,
+        email,
+        plan,
+        service: selectedService,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      alert("✅ Payment details submitted. You'll receive an email once payment is confirmed.");
+      document.getElementById("payment-form").reset();
+    } catch (error) {
+      console.error("Error saving payment:", error);
+      alert("❌ Error submitting payment info. Try again.");
+    }
+  });
   </script>
 </body>
 </html>
