@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orlando Terrace Utility Service Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    h1 {
+      font-size: 2.2em;
+      color: #222;
+    }
+    .service-card {
+      background: #fff;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .service-image {
+      width: 100%;
+      border-radius: 10px;
+      max-height: 300px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    h2 {
+      color: #1e3a8a;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    .price-plan {
+      display: grid;
+      gap: 15px;
+    }
+    .plan {
+      background: #eef2ff;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .btc {
+      color: #ff6600;
+      font-weight: bold;
+    }
+    .address {
+      font-family: monospace;
+      color: #444;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-family: 'Urbanist', sans-serif;
+    }
+    button {
+      background: #1e3a8a;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #162f6b;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="service-title">Loading...</h1>
+    <p>Explore your selected utility service for Orlando Terrace tenants</p>
+  </header>
+
+  <div class="service-card">
+    <img id="service-img" src="" alt="Service Image" class="service-image" />
+    
+    <div class="section">
+      <h2>Description</h2>
+      <p id="service-desc"></p>
+    </div>
+
+    <div class="section">
+      <h2>Service Plans & Pricing</h2>
+      <div id="service-plans" class="price-plan"></div>
+    </div>
+
+    <div class="section">
+      <h2>How It Helps Orlando Terrace Residents</h2>
+      <p id="service-benefits"></p>
+    </div>
+
+    <div class="section">
+      <h2>Bitcoin Payment Address</h2>
+      <p class="address">bc1q9pkvjhdujghqhgalzu2xptges2xt8ewp3jexqa</p>
+    </div>
+
+    <div class="section">
+      <h2>Make a Payment</h2>
+      <p>Please complete the BTC transfer to the wallet address before submitting.</p>
+      <form id="payment-form">
+        <label>Tenant Name:<br>
+          <input type="text" id="tenant-name" required>
+        </label><br>
+        <label>Phone Number:<br>
+          <input type="tel" id="tenant-phone" required>
+        </label><br>
+        <label>Email Address:<br>
+          <input type="email" id="tenant-email" required>
+        </label><br>
+        <label>Choose Plan:<br>
+          <select id="tenant-plan" required>
+            <option value="">Loading...</option>
+          </select>
+        </label><br>
+        <button type="submit">Submit Payment Info</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    Orlando Terrace Apartment Services © 2025
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <script>
+    const serviceData = {
+      internet: {
+        title: "High-Speed Internet",
+        desc: "Reliable Wi-Fi with speeds up to 1 Gbps. Perfect for streaming, gaming, and remote work. Powered by AT&T Fiber and Spectrum.",
+        img: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1000&q=80",
+        plans: [
+          { name: "Basic", price: "$50/month", btc: "≈0.00077 BTC", feature: "Up to 200 Mbps" },
+          { name: "Standard", price: "$75/month", btc: "≈0.00115 BTC", feature: "Up to 500 Mbps" },
+          { name: "Premium", price: "$100/month", btc: "≈0.00153 BTC", feature: "Up to 1 Gbps + Free Modem" }
+        ],
+        benefits: "Enjoy uninterrupted video calls, 4K streaming, and secure home networks — all tailored for busy professionals and families living at Orlando Terrace."
+      },
+      pet: {
+        title: "Pet Services",
+        desc: "On-demand dog walking, grooming, and in-unit pet care. Partnered with Rover and Wag! Pet lovers welcome here.",
+        img: "https://www.dogseechew.in/storage/editor_648b14d0a0dc8-pet-care-on-a-budget-an-expert-guide.jpg",
+        plans: [
+          { name: "Walk & Feed", price: "$30/week", btc: "≈0.00046 BTC", feature: "30-min walk + feeding daily" },
+          { name: "Full Care", price: "$60/week", btc: "≈0.00092 BTC", feature: "Walk, feed, grooming, check-ins" }
+        ],
+        benefits: "Keep your furry companions happy and healthy while you're away or at work — all services come to your door!"
+      },
+      cable: {
+        title: "Cable TV",
+        desc: "Xfinity, Spectrum, and DirecTV packages available in all units. Get your favorite channels with HD & DVR included.",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBhFndyT3WfXBaJl7rKwcrHbWrc99U7gzfSg&s",
+        plans: [
+          { name: "Standard", price: "$40/month", btc: "≈0.00061 BTC", feature: "Local + 50 Channels" },
+          { name: "HD Premium", price: "$65/month", btc: "≈0.00099 BTC", feature: "100+ Channels, HD, Sports" }
+        ],
+        benefits: "Relax with premium entertainment right from your apartment. Never miss a game or show again."
+      },
+      security: {
+        title: "Home Security",
+        desc: "Smart security systems from Ring, ADT, and Vivint. Remote control, video monitoring, and 24/7 alerts.",
+        img: "https://closeguardtechnology.com/content/images/smarthomeimage.jpg",
+        plans: [
+          { name: "Standard Monitoring", price: "$45/month", btc: "≈0.00069 BTC", feature: "Doorbell cam + 24/7 alerts" },
+          { name: "Smart Secure Pro", price: "$80/month", btc: "≈0.00123 BTC", feature: "Camera, motion sensors, remote app access" }
+        ],
+        benefits: "Feel safe at Orlando Terrace with cutting-edge, smart security solutions tailored to your lifestyle."
+      }
+    };
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.appspot.com",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedService = urlParams.get("service");
+
+    if (selectedService && serviceData[selectedService]) {
+      const data = serviceData[selectedService];
+
+      document.getElementById("service-title").textContent = data.title;
+      document.getElementById("service-img").src = data.img;
+      document.getElementById("service-desc").textContent = data.desc;
+      document.getElementById("service-benefits").textContent = data.benefits;
+
+      const plansContainer = document.getElementById("service-plans");
+      plansContainer.innerHTML = "";
+      data.plans.forEach(plan => {
+        const div = document.createElement("div");
+        div.className = "plan";
+        div.innerHTML = `<strong>${plan.name}</strong><br>${plan.feature}<br><span>${plan.price}</span> — <span class="btc">${plan.btc}</span>`;
+        plansContainer.appendChild(div);
+
+        const opt = document.createElement("option");
+        opt.value = `${plan.name} - ${plan.price} - ${plan.btc}`;
+        opt.textContent = `${plan.name} — ${plan.price} (${plan.btc})`;
+        document.getElementById("tenant-plan").appendChild(opt);
+      });
+    } else {
+      document.querySelector(".service-card").innerHTML = "<p>Service not found. Please go back and try again.</p>";
+    }
+
+    // Payment form submission
+    document.getElementById("payment-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      alert("⚠️ Please make your BTC transfer now to:\nbc1q9pkvjhdujghqhgalzu2xptges2xt8ewp3jexqa\n\nOnce confirmed, an email will be sent to you.");
+
+      const name = document.getElementById("tenant-name").value;
+      const phone = document.getElementById("tenant-phone").value;
+      const email = document.getElementById("tenant-email").value;
+      const plan = document.getElementById("tenant-plan").value;
+
+      try {
+        await db.collection("orlando_payments").add({
+          name,
+          phone,
+          email,
+          plan,
+          service: selectedService,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert("✅ Payment details submitted. You'll receive an email once payment is confirmed.");
+        document.getElementById("payment-form").reset();
+      } catch (error) {
+        console.error("Error saving payment:", error);
+        alert("❌ Error submitting payment info. Try again.");
+      }
+    });
+  </script>
+</body>
+</html>
